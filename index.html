@@ -1,18 +1,79 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+// 建立所有測驗題目資料庫
+const quizQuestions = [
+  {
+    // 第一題題目
+    question: "在 JavaScript 中，哪一個指令可以在主控台輸出文字？",
+    // 第一題選項
+    options: ["print()", "console.log()", "display()", "write()"],
+    // 正確答案索引值 (對應 console.log())
+    answer: 1
+  },
+  {
+    // 第二題題目
+    question: "在 p5.js 中，哪一個函式會在程式開始時執行一次？",
+    // 第二題選項
+    options: ["start()", "draw()", "setup()", "begin()"],
+    // 正確答案索引值 (對應 setup())
+    answer: 2
+  },
+  {
+    // 第三題題目
+    question: "在 JavaScript 中，哪一個指令可以宣告不可重新指定的變數？",
+    // 第三題選項
+    options: ["var", "let", "const", "fixed"],
+    // 正確答案索引值 (對應 const)
+    answer: 2
+  },
+  {
+    // 第四題題目
+    question: "在 p5.js 中，哪一個函式會重複執行以繪製動畫？",
+    // 第四題選項
+    options: ["setup()", "loop()", "draw()", "repeat()"],
+    // 正確答案索引值 (對應 draw())
+    answer: 2
+  },
+  {
+    // 第五題題目
+    question: "哪一個運算子可以比較兩個值是否相等且型別相同？",
+    // 第五題選項
+    options: ["=", "==", "===", "!="],
+    // 正確答案索引值 (對應 ===)
+    answer: 2
+  }
+];
 
-    <title>Sketch</title>
+// 宣告目前題目的索引值
+let currentQuestion = 0;
 
-    <link rel="stylesheet" type="text/css" href="style.css">
+// 宣告答對總題數
+let score = 0;
 
-    <script src="libraries/p5.min.js"></script>
-    <script src="libraries/p5.sound.min.js"></script>
-  </head>
+// 宣告使用者點選的選項索引值 (-1 表示尚未選擇)
+let selectedOption = -1;
 
-  <body>
-    <script src="sketch.js"></script>
-  </body>
-</html>
+// 宣告目前題目是否已經回答
+let hasAnswered = false;
+
+// 宣告測驗是否已經全部結束
+let isFinished = false;
+
+// 宣告儲存選項點擊範圍的陣列
+let optionRects = [];
+
+// 宣告「下一題」按鈕的點擊區域與尺寸設定
+let nextButtonRect = {
+  x: 0,
+  y: 0,
+  width: 200,
+  height: 50
+};
+
+// 宣告「重新測驗」按鈕的點擊區域與尺寸設定
+let restartButtonRect = {
+  x: 0,
+  y: 0,
+  width: 200,
+  height: 50
+};
+
+// p5.js 初始化
